@@ -29,6 +29,12 @@ def split_loaded_pdf_data(data_from_pdf: List) -> List:
     return splitted_data_from_pdf
 
 
+def convert_splitted_data_to_embeddings(splitted_data_from_pdf: List):
+    embeddings_model = OpenAIEmbeddings(openai_api_key=OPENAI_API)
+    embedding_size = 1536
+    embeddings = embeddings_model.embed_documents(splitted_data_from_pdf[0].page_content)
+
+    return embeddings
 
 
 
