@@ -5,6 +5,7 @@ from langchain.embeddings import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from typing import List
 from config import OPENAI_API
+from pineconeDB import retriever
 
 
 def load_pdf_doc(path_to_doc: str) -> List:
@@ -32,9 +33,18 @@ def split_loaded_pdf_data(data_from_pdf: List) -> List:
 def convert_splitted_data_to_embeddings(splitted_data_from_pdf: List):
     embeddings_model = OpenAIEmbeddings(openai_api_key=OPENAI_API)
     embedding_size = 1536
-    embeddings = embeddings_model.embed_documents(splitted_data_from_pdf[0].page_content)
+    embeddings = embeddings_model.embed_documents(splitted_data_from_pdf)
 
     return embeddings
 
 
+def main(path_to_pdf: str):
+    loaded = load_pdf_doc(path_to_pdf)
+    splitted_docs = split_loaded_pdf_data(loaded)
 
+    retriever.add_documents(splitted_docs)
+
+    print('files were loaded')
+
+if __name__ == '__main__':
+    main('bez.pdf')
