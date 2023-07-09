@@ -1,5 +1,4 @@
 import os
-
 from langchain.document_loaders import UnstructuredPDFLoader
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -38,7 +37,7 @@ def convert_splitted_data_to_embeddings(splitted_data_from_pdf: List):
     return embeddings
 
 
-def main(path_to_pdf: str):
+def pdf_load(path_to_pdf: str):
     loaded = load_pdf_doc(path_to_pdf)
     splitted_docs = split_loaded_pdf_data(loaded)
 
@@ -47,4 +46,4 @@ def main(path_to_pdf: str):
     print('files were loaded')
 
 if __name__ == '__main__':
-    main('bez.pdf')
+    pass
