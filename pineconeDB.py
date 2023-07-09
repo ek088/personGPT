@@ -29,11 +29,13 @@ memory = VectorStoreRetrieverMemory(retriever=retriever)
 print('memory was loaded')
 
 
+
+
 def search_in_pinecone_without_context(query):
     llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")  # Can be any valid LLM
     _DEFAULT_TEMPLATE = """
         {history}
-
+    
         {input}
     """
     PROMPT = PromptTemplate(
@@ -59,6 +61,4 @@ def search_in_pinecone_without_context(query):
 
 if __name__ == '__main__':
 
-    query = "Hello, how are you?"
-
-    print(search_in_pinecone_without_context(query))
+    pass
